@@ -1,6 +1,7 @@
 import os
 import sys
 import re
+import time
 
 from pyspark.sql import functions as F
 from pyspark import SparkContext
@@ -23,12 +24,10 @@ spark = SparkSession \
 spark.sparkContext.setLogLevel("ERROR")
 
 schemas = StructType().add('Date',TimestampType()).add('name','string').add('text','string').add('media','string')
-parquet_sdf = spark.readStream.schema(schemas).format('parquet').load('dfs\Data_for_10_sec_at20231223015422.parquet')
+parquet_sdf = spark.readStream.schema(schemas).format('parquet').load('dfs\Data_for_{PERIOD}_sec_at20231223015422.parquet')
 
 print(parquet_sdf.isStreaming)
 print(parquet_sdf.schema)
-
-import time
 co = parquet_sdf.groupBy('name').count()
 query = co \
     .writeStream \
