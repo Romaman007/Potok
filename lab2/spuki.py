@@ -24,7 +24,7 @@ spark = SparkSession \
 spark.sparkContext.setLogLevel("ERROR")
 
 schemas = StructType().add('Date',TimestampType()).add('name','string').add('text','string').add('media','string')
-parquet_sdf = spark.readStream.schema(schemas).format('parquet').load('dfs\Data_for_{PERIOD}_sec_at20231223015422.parquet')
+parquet_sdf = spark.readStream.schema(schemas).format('parquet').load('dfs')
 
 print(parquet_sdf.isStreaming)
 print(parquet_sdf.schema)
