@@ -4,7 +4,7 @@ import asyncio
 import pandas as pd
 import datetime
 
-CHANNEL_ID = -1002029455841
+CHANNEL_ID = [-1002029455841]
 period = 10
 app = Client(
     "ddd",
@@ -15,7 +15,7 @@ app = Client(
 
 @app.on_message(filters=filters.channel)
 def my_handler(client: Client, message: types.Message):
-    if message.chat.id != CHANNEL_ID:
+    if message.chat.id not in CHANNEL_ID:
         return
     print("Получено новое сообщение с ID")
     media = 'Yes' if message.media!=None else 'None' 
