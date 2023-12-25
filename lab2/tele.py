@@ -17,7 +17,6 @@ app = Client(
 def my_handler(client: Client, message: types.Message):
     if message.chat.id not in CHANNEL_ID:
         return
-    print("Получено новое сообщение с ID")
     media = 'Yes' if message.media!=None else 'None' 
     timestamp = message.date.strftime('%Y%m%d%H%M%S')
     to_pd.append([timestamp,message.chat.title,message.text,media])
@@ -29,10 +28,8 @@ async def main():
         to_pd =[]
         await asyncio.sleep(period)
         df = pd.DataFrame(to_pd, columns =['Date','name','text','media'])
-        print(df)
         timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
         df.to_parquet(f'dfs/Data_for_{period}_sec_at{timestamp}.parquet', index=False)
-        print(to_pd)
 
 app.start()
 app.run(main())
