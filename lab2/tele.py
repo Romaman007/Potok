@@ -8,8 +8,8 @@ CHANNEL_ID = [-1002029455841]
 period = 10
 app = Client(
     "ddd",
-    api_id=14929916,
-    api_hash="2c14e0bf350dac1185e6f7554970e54b"
+    api_id=
+    api_hash=""
 )
 
 
